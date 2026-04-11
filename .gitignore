@@ -1,0 +1,51 @@
+# ============================================================
+#  N Writing  —  .gitignore
+#  소스코드는 절대 커밋하지 않음. 릴리즈 바이너리만 GitHub에 업로드.
+# ============================================================
+
+# ── Python 소스 전체 차단 ─────────────────────────────────
+*.py
+*.pyw
+*.pyc
+*.pyo
+*.pyd
+
+# ── 설정 / 민감 정보 ─────────────────────────────────────
+*.json
+*.xlsx
+*.txt
+*.env
+*.cfg
+*.ini
+*.log
+
+# ── 에셋 / 리소스 ────────────────────────────────────────
+prompts/
+background/
+cardnews_templates/
+output/
+output_images/
+chrome_profile/
+chrome_profile_mamul/
+userdata/
+bloglist/
+testpy/
+
+# ── 빌드 중간 산출물 ─────────────────────────────────────
+obf_src/
+build_out/
+build_tmp/
+dist/
+__pycache__/
+*.spec
+
+# ── PyArmor ──────────────────────────────────────────────
+.pyarmor/
+pyarmor_runtime*/
+
+# ── 허용 파일 (빌드 스크립트 / 릴리즈) ─────────────────
+!.gitignore
+!build.bat
+!setup.iss
+!release/
+!release/*.exe
