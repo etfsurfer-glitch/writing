@@ -3,7 +3,7 @@
 ; ============================================================
 
 #define AppName      "N Writing 블로그 자동화"
-#define AppVersion   "1.0"
+#define AppVersion   "1.21"
 #define AppPublisher "runto.online"
 #define AppExeName   "NWriting.exe"
 #define BuildDir     "build_out\NWriting"
@@ -18,6 +18,7 @@ DefaultDirName={autopf}\NWriting
 DefaultGroupName={#AppName}
 OutputDir=release
 OutputBaseFilename=NWriting_v{#AppVersion}_Setup
+VersionInfoVersion={#AppVersion}.0.0
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
@@ -53,7 +54,13 @@ Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExeName}"; \
 Name: "{group}\제거"; Filename: "{uninstallexe}"
 
 [Run]
-; ── 설치 완료 후 자동 실행 없음 — 직접 실행 안내만 표시 ──
+; ── Playwright Chromium 브라우저 설치 (최초 1회, 필수) ──────
+; PLAYWRIGHT_BROWSERS_PATH 를 _internal 안으로 지정해야 앱이 찾을 수 있음
+Filename: "cmd.exe"; \
+    Parameters: "/C set ""PLAYWRIGHT_BROWSERS_PATH=0"" && ""{app}\_internal\playwright\driver\node.exe"" ""{app}\_internal\playwright\driver\package\cli.js"" install chromium"; \
+    WorkingDir: "{app}\_internal\playwright\driver\package"; \
+    StatusMsg: "Playwright 브라우저 설치 중... (시간이 걸릴 수 있습니다)"; \
+    Flags: runhidden waituntilterminated
 
 [Code]
 { 설치 완료(Finish) 페이지 문구 커스터마이징 }
