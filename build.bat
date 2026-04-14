@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 
 echo.
 echo ============================================================
-echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.22
+echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.23
 echo ============================================================
 echo.
 
@@ -103,26 +103,12 @@ pyinstaller ^
     --add-data "%OBF_DIR%\mamul_writer.py;." ^
     --add-data "%OBF_DIR%\naver_land_core.py;." ^
     --hidden-import _tkinter ^
-    --hidden-import tkinter ^
-    --hidden-import tkinter.ttk ^
-    --hidden-import tkinter.messagebox ^
-    --hidden-import tkinter.filedialog ^
-    --hidden-import tkinter.simpledialog ^
+    --collect-submodules tkinter ^
+    --collect-submodules PIL ^
     --hidden-import requests ^
     --hidden-import playwright_stealth ^
     --hidden-import supabase ^
     --hidden-import google.genai ^
-    --hidden-import PIL ^
-    --hidden-import PIL.Image ^
-    --hidden-import PIL.ImageDraw ^
-    --hidden-import PIL.ImageFont ^
-    --hidden-import PIL.ImageFilter ^
-    --hidden-import PIL.ImageEnhance ^
-    --hidden-import PIL.ImageTk ^
-    --hidden-import openpyxl ^
-    --hidden-import openpyxl.styles ^
-    --hidden-import openpyxl.styles.fonts ^
-    --hidden-import openpyxl.styles.fills ^
     --hidden-import numpy ^
     --hidden-import win32clipboard ^
     --hidden-import win32con ^
@@ -157,12 +143,12 @@ if errorlevel 1 (
 echo.
 echo ============================================================
 echo   빌드 완료!
-echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.22_Setup.exe
+echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.23_Setup.exe
 echo ============================================================
 echo.
 echo   GitHub 릴리즈 업로드 절차:
 echo   1. https://github.com/etfsurfer-glitch/writing/releases/new
-echo   2. Tag: 1.22  /  Title: v1.22
-echo   3. NWriting_v1.22_Setup.exe 첨부 후 Publish
+echo   2. Tag: 1.23  /  Title: v1.23
+echo   3. NWriting_v1.23_Setup.exe 첨부 후 Publish
 echo.
 pause
