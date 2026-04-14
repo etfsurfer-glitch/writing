@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 
 echo.
 echo ============================================================
-echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.21
+echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.22
 echo ============================================================
 echo.
 
@@ -63,6 +63,12 @@ echo     완료
 :: ── PyInstaller 패키징 ────────────────────────────────────
 echo.
 echo [4/5] PyInstaller 패키징 중...
+:: 주의: PyArmor 로 난독화된 .py 는 import 문이 암호화되어 있어 PyInstaller 의
+::       정적 분석이 --hidden-import 로도 본 프로젝트 모듈들을 안정적으로 포함하지
+::       못한다 (v1.21 에서 compress2 만 PYZ 에 들어가고 나머지 16개 누락 확인).
+::       따라서 본 프로젝트의 난독화 .py 들은 --add-data 로 _internal/ 루트에 강제
+::       복사한다. frozen 런타임에서 sys._MEIPASS(= _internal/) 가 sys.path 에 있으므로
+::       일반 import 로 해결된다.
 pyinstaller ^
     --noconfirm ^
     --onedir ^
@@ -78,30 +84,30 @@ pyinstaller ^
     --add-data "%OBF_DIR%\cardnews_templates;cardnews_templates" ^
     --add-data "%OBF_DIR%\version.txt;." ^
     --add-data "%OBF_DIR%\common.jpg;." ^
-    --hidden-import stealth_utils ^
-    --hidden-import auth ^
-    --hidden-import tracker ^
-    --hidden-import login_ui ^
-    --hidden-import updater ^
-    --hidden-import blog_collector ^
-    --hidden-import blog_scraper ^
-    --hidden-import blog_writer ^
-    --hidden-import gemini_writer ^
-    --hidden-import gemini_mamul_writer ^
-    --hidden-import celebrity_gemini_writer ^
-    --hidden-import celebrity_image_filter ^
-    --hidden-import image_laundry ^
-    --hidden-import add_text_to_image ^
-    --hidden-import compress ^
-    --hidden-import mamul_writer ^
-    --hidden-import naver_land_core ^
+    --add-data "%OBF_DIR%\stealth_utils.py;." ^
+    --add-data "%OBF_DIR%\auth.py;." ^
+    --add-data "%OBF_DIR%\tracker.py;." ^
+    --add-data "%OBF_DIR%\login_ui.py;." ^
+    --add-data "%OBF_DIR%\updater.py;." ^
+    --add-data "%OBF_DIR%\blog_collector.py;." ^
+    --add-data "%OBF_DIR%\blog_scraper.py;." ^
+    --add-data "%OBF_DIR%\blog_writer.py;." ^
+    --add-data "%OBF_DIR%\gemini_writer.py;." ^
+    --add-data "%OBF_DIR%\gemini_mamul_writer.py;." ^
+    --add-data "%OBF_DIR%\celebrity_gemini_writer.py;." ^
+    --add-data "%OBF_DIR%\celebrity_image_filter.py;." ^
+    --add-data "%OBF_DIR%\image_laundry.py;." ^
+    --add-data "%OBF_DIR%\add_text_to_image.py;." ^
+    --add-data "%OBF_DIR%\compress.py;." ^
+    --add-data "%OBF_DIR%\compress2.py;." ^
+    --add-data "%OBF_DIR%\mamul_writer.py;." ^
+    --add-data "%OBF_DIR%\naver_land_core.py;." ^
     --hidden-import _tkinter ^
     --hidden-import tkinter ^
     --hidden-import tkinter.ttk ^
     --hidden-import tkinter.messagebox ^
     --hidden-import tkinter.filedialog ^
     --hidden-import tkinter.simpledialog ^
-    --collect-all customtkinter ^
     --hidden-import requests ^
     --hidden-import playwright_stealth ^
     --hidden-import supabase ^
@@ -113,7 +119,6 @@ pyinstaller ^
     --hidden-import PIL.ImageFilter ^
     --hidden-import PIL.ImageEnhance ^
     --hidden-import PIL.ImageTk ^
-    --hidden-import compress2 ^
     --hidden-import openpyxl ^
     --hidden-import openpyxl.styles ^
     --hidden-import openpyxl.styles.fonts ^
@@ -152,12 +157,12 @@ if errorlevel 1 (
 echo.
 echo ============================================================
 echo   빌드 완료!
-echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.21_Setup.exe
+echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.22_Setup.exe
 echo ============================================================
 echo.
 echo   GitHub 릴리즈 업로드 절차:
 echo   1. https://github.com/etfsurfer-glitch/writing/releases/new
-echo   2. Tag: 1.21  /  Title: v1.21
-echo   3. NWriting_v1.21_Setup.exe 첨부 후 Publish
+echo   2. Tag: 1.22  /  Title: v1.22
+echo   3. NWriting_v1.22_Setup.exe 첨부 후 Publish
 echo.
 pause
