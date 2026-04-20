@@ -15,6 +15,14 @@ set OBF_DIR=%SRC_DIR%obf_src
 set BUILD_DIR=%SRC_DIR%build_out
 set RELEASE_DIR=%SRC_DIR%release
 
+:: Python Scripts 디렉토리(pyarmor.exe / pyinstaller.exe 위치) 를 PATH 앞에 prepend.
+:: PEP 514 layout (pythoncore-*) 자동 감지 — 버전 업그레이드해도 동작.
+for /d %%D in ("%LOCALAPPDATA%\Python\pythoncore-*") do set "PY_SCRIPTS=%%D\Scripts"
+if defined PY_SCRIPTS (
+    set "PATH=%PY_SCRIPTS%;%PATH%"
+    echo     Python Scripts: %PY_SCRIPTS%
+)
+
 :: ── 사전 청소 ──────────────────────────────────────────────
 echo [1/5] 이전 빌드 정리 중...
 if exist "%OBF_DIR%"   rmdir /s /q "%OBF_DIR%"
@@ -31,7 +39,7 @@ pyarmor gen --recursive --output "%OBF_DIR%" ^
     app.py stealth_utils.py auth.py tracker.py login_ui.py updater.py ^
     blog_collector.py blog_scraper.py blog_writer.py gemini_writer.py ^
     gemini_mamul_writer.py celebrity_gemini_writer.py celebrity_image_filter.py ^
-    image_laundry.py ^
+    image_laundry.py naver_writing_rules.py ^
     add_text_to_image.py compress.py compress2.py mamul_writer.py naver_land_core.py
 if errorlevel 1 (
     echo [오류] PyArmor 실패
@@ -97,6 +105,7 @@ pyinstaller ^
     --add-data "%OBF_DIR%\celebrity_gemini_writer.py;." ^
     --add-data "%OBF_DIR%\celebrity_image_filter.py;." ^
     --add-data "%OBF_DIR%\image_laundry.py;." ^
+    --add-data "%OBF_DIR%\naver_writing_rules.py;." ^
     --add-data "%OBF_DIR%\add_text_to_image.py;." ^
     --add-data "%OBF_DIR%\compress.py;." ^
     --add-data "%OBF_DIR%\compress2.py;." ^
