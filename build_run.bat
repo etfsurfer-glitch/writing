@@ -31,6 +31,7 @@ pyarmor gen --recursive --output "%OBF_DIR%" ^
     blog_collector.py blog_scraper.py blog_writer.py gemini_writer.py ^
     gemini_mamul_writer.py celebrity_gemini_writer.py celebrity_image_filter.py ^
     image_laundry.py naver_writing_rules.py ^
+    coupang_scraper.py coupang_gemini_writer.py ^
     add_text_to_image.py compress.py compress2.py mamul_writer.py naver_land_core.py >> "%LOG%" 2>&1
 if errorlevel 1 (
     echo FAILED: PyArmor >> "%LOG%"
@@ -88,6 +89,8 @@ pyinstaller ^
     --add-data "%OBF_DIR%\celebrity_image_filter.py;." ^
     --add-data "%OBF_DIR%\image_laundry.py;." ^
     --add-data "%OBF_DIR%\naver_writing_rules.py;." ^
+    --add-data "%OBF_DIR%\coupang_scraper.py;." ^
+    --add-data "%OBF_DIR%\coupang_gemini_writer.py;." ^
     --add-data "%OBF_DIR%\add_text_to_image.py;." ^
     --add-data "%OBF_DIR%\compress.py;." ^
     --add-data "%OBF_DIR%\compress2.py;." ^
@@ -105,7 +108,11 @@ pyinstaller ^
     --hidden-import win32api ^
     --hidden-import aiohttp ^
     --hidden-import bs4 ^
+    --hidden-import zendriver ^
+    --hidden-import curl_cffi ^
     --collect-all playwright ^
+    --collect-all zendriver ^
+    --collect-all curl_cffi ^
     --collect-all openpyxl ^
     --collect-all certifi ^
     --collect-all truststore ^
