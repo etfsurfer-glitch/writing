@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 
 echo.
 echo ============================================================
-echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.29
+echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.31
 echo ============================================================
 echo.
 
@@ -39,8 +39,8 @@ pyarmor gen --recursive --output "%OBF_DIR%" ^
     app.py stealth_utils.py auth.py tracker.py login_ui.py updater.py ^
     blog_collector.py blog_scraper.py blog_writer.py gemini_writer.py ^
     gemini_mamul_writer.py celebrity_gemini_writer.py celebrity_image_filter.py ^
-    image_laundry.py naver_writing_rules.py ^
-    coupang_scraper.py coupang_gemini_writer.py ^
+    image_laundry.py naver_writing_rules.py material_collector.py ^
+    coupang_scraper.py coupang_gemini_writer.py gemini_retry.py ^
     add_text_to_image.py compress.py compress2.py mamul_writer.py naver_land_core.py
 if errorlevel 1 (
     echo [오류] PyArmor 실패
@@ -107,8 +107,10 @@ pyinstaller ^
     --add-data "%OBF_DIR%\celebrity_image_filter.py;." ^
     --add-data "%OBF_DIR%\image_laundry.py;." ^
     --add-data "%OBF_DIR%\naver_writing_rules.py;." ^
+    --add-data "%OBF_DIR%\material_collector.py;." ^
     --add-data "%OBF_DIR%\coupang_scraper.py;." ^
     --add-data "%OBF_DIR%\coupang_gemini_writer.py;." ^
+    --add-data "%OBF_DIR%\gemini_retry.py;." ^
     --add-data "%OBF_DIR%\add_text_to_image.py;." ^
     --add-data "%OBF_DIR%\compress.py;." ^
     --add-data "%OBF_DIR%\compress2.py;." ^
@@ -133,6 +135,8 @@ pyinstaller ^
     --collect-all zendriver ^
     --collect-all curl_cffi ^
     --collect-all openpyxl ^
+    --collect-all certifi ^
+    --collect-all truststore ^
     "%OBF_DIR%\app.py"
 
 if errorlevel 1 (
@@ -159,12 +163,12 @@ if errorlevel 1 (
 echo.
 echo ============================================================
 echo   빌드 완료!
-echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.29_Setup.exe
+echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.31_Setup.exe
 echo ============================================================
 echo.
 echo   GitHub 릴리즈 업로드 절차:
 echo   1. https://github.com/etfsurfer-glitch/writing/releases/new
-echo   2. Tag: 1.29  /  Title: v1.29
-echo   3. NWriting_v1.29_Setup.exe 첨부 후 Publish
+echo   2. Tag: 1.31  /  Title: v1.31
+echo   3. NWriting_v1.31_Setup.exe 첨부 후 Publish
 echo.
 pause
