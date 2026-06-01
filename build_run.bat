@@ -33,6 +33,7 @@ pyarmor gen --recursive --output "%OBF_DIR%" ^
     image_laundry.py naver_writing_rules.py material_collector.py ^
     coupang_scraper.py coupang_gemini_writer.py gemini_retry.py ^
     economy_gemini_writer.py exposure_checker.py coupang_partners.py ^
+    composite_settings.py free_image_fetcher.py image_launderer.py ^
     add_text_to_image.py compress.py compress2.py mamul_writer.py naver_land_core.py >> "%LOG%" 2>&1
 if errorlevel 1 (
     echo FAILED: PyArmor >> "%LOG%"
@@ -97,6 +98,9 @@ pyinstaller ^
     --add-data "%OBF_DIR%\economy_gemini_writer.py;." ^
     --add-data "%OBF_DIR%\exposure_checker.py;." ^
     --add-data "%OBF_DIR%\coupang_partners.py;." ^
+    --add-data "%OBF_DIR%\composite_settings.py;." ^
+    --add-data "%OBF_DIR%\free_image_fetcher.py;." ^
+    --add-data "%OBF_DIR%\image_launderer.py;." ^
     --add-data "%OBF_DIR%\add_text_to_image.py;." ^
     --add-data "%OBF_DIR%\compress.py;." ^
     --add-data "%OBF_DIR%\compress2.py;." ^
