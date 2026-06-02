@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 
 echo.
 echo ============================================================
-echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.37
+echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.38
 echo ============================================================
 echo.
 
@@ -41,6 +41,7 @@ pyarmor gen --recursive --output "%OBF_DIR%" ^
     gemini_mamul_writer.py celebrity_gemini_writer.py celebrity_image_filter.py ^
     image_laundry.py naver_writing_rules.py material_collector.py ^
     coupang_scraper.py coupang_gemini_writer.py gemini_retry.py ^
+    coupang_auto_scraper.py coupang_auto_writer.py ^
     economy_gemini_writer.py exposure_checker.py coupang_partners.py ^
     composite_settings.py free_image_fetcher.py image_launderer.py ^
     add_text_to_image.py compress.py compress2.py mamul_writer.py naver_land_core.py
@@ -112,6 +113,8 @@ pyinstaller ^
     --add-data "%OBF_DIR%\material_collector.py;." ^
     --add-data "%OBF_DIR%\coupang_scraper.py;." ^
     --add-data "%OBF_DIR%\coupang_gemini_writer.py;." ^
+    --add-data "%OBF_DIR%\coupang_auto_scraper.py;." ^
+    --add-data "%OBF_DIR%\coupang_auto_writer.py;." ^
     --add-data "%OBF_DIR%\gemini_retry.py;." ^
     --add-data "%OBF_DIR%\economy_gemini_writer.py;." ^
     --add-data "%OBF_DIR%\exposure_checker.py;." ^
@@ -171,12 +174,12 @@ if errorlevel 1 (
 echo.
 echo ============================================================
 echo   빌드 완료!
-echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.37_Setup.exe
+echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.38_Setup.exe
 echo ============================================================
 echo.
 echo   GitHub 릴리즈 업로드 절차:
 echo   1. https://github.com/etfsurfer-glitch/writing/releases/new
-echo   2. Tag: 1.37  /  Title: v1.37
-echo   3. NWriting_v1.37_Setup.exe 첨부 후 Publish
+echo   2. Tag: 1.38  /  Title: v1.38
+echo   3. NWriting_v1.38_Setup.exe 첨부 후 Publish
 echo.
 pause
