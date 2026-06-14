@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 
 echo.
 echo ============================================================
-echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.49
+echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.50
 echo ============================================================
 echo.
 
@@ -177,12 +177,12 @@ if errorlevel 1 (
 echo.
 echo ============================================================
 echo   빌드 완료!
-echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.49_Setup.exe
+echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.50_Setup.exe
 echo ============================================================
 echo.
 echo   GitHub 릴리즈 업로드 절차:
 echo   1. https://github.com/etfsurfer-glitch/writing/releases/new
-echo   2. Tag: 1.49  /  Title: v1.49
-echo   3. NWriting_v1.49_Setup.exe 첨부 후 Publish
+echo   2. Tag: 1.50  /  Title: v1.50
+echo   3. NWriting_v1.50_Setup.exe 첨부 후 Publish
 echo.
 pause
