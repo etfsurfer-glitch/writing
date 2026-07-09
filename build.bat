@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 
 echo.
 echo ============================================================
-echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.55
+echo   N Writing 블로그 자동화  —  빌드 스크립트  v1.56
 echo ============================================================
 echo.
 
@@ -45,6 +45,7 @@ pyarmor gen --recursive --output "%OBF_DIR%" ^
     economy_gemini_writer.py exposure_checker.py coupang_partners.py ^
     composite_settings.py free_image_fetcher.py image_launderer.py ^
     telegram_notify.py blog_monitor.py rss_collector.py post_privater.py ^
+    naver_place.py mat_gemini_writer.py ^
     add_text_to_image.py compress.py compress2.py mamul_writer.py naver_land_core.py
 if errorlevel 1 (
     echo [오류] PyArmor 실패
@@ -127,6 +128,8 @@ pyinstaller ^
     --add-data "%OBF_DIR%\blog_monitor.py;." ^
     --add-data "%OBF_DIR%\rss_collector.py;." ^
     --add-data "%OBF_DIR%\post_privater.py;." ^
+    --add-data "%OBF_DIR%\naver_place.py;." ^
+    --add-data "%OBF_DIR%\mat_gemini_writer.py;." ^
     --add-data "%OBF_DIR%\add_text_to_image.py;." ^
     --add-data "%OBF_DIR%\compress.py;." ^
     --add-data "%OBF_DIR%\compress2.py;." ^
@@ -179,12 +182,12 @@ if errorlevel 1 (
 echo.
 echo ============================================================
 echo   빌드 완료!
-echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.55_Setup.exe
+echo   인스톨러 위치: %RELEASE_DIR%\NWriting_v1.56_Setup.exe
 echo ============================================================
 echo.
 echo   GitHub 릴리즈 업로드 절차:
 echo   1. https://github.com/etfsurfer-glitch/writing/releases/new
-echo   2. Tag: 1.55  /  Title: v1.55
-echo   3. NWriting_v1.55_Setup.exe 첨부 후 Publish
+echo   2. Tag: 1.56  /  Title: v1.56
+echo   3. NWriting_v1.56_Setup.exe 첨부 후 Publish
 echo.
 pause
