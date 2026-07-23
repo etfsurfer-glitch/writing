@@ -3,7 +3,7 @@
 ; ============================================================
 
 #define AppName      "N Writing 블로그 자동화"
-#define AppVersion   "1.63"
+#define AppVersion   "1.64"
 #define AppPublisher "runto.online"
 #define AppExeName   "NWriting.exe"
 #define BuildDir     "build_out\NWriting"
